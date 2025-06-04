@@ -16,7 +16,7 @@ use Phalcon\Session\Manager as SessionManager;
  * Shared configuration service
  */
 $di->setShared('config', function () {
-    return include APP_PATH . "/config/config.php";
+    return include APP_PATH . "/Config/config.php";
 });
 
 /**
