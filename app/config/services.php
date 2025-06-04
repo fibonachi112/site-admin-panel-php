@@ -30,6 +30,12 @@ $di->setShared('url', function () {
     return $url;
 });
 
+$di->setShared('security', function(){
+    $security = new \Phalcon\Encryption\Security();
+    $security->setWorkFactor(12);
+    return $security;
+});
+
 /**
  * Setting up the view component
  */
