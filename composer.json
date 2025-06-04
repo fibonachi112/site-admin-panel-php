@@ -1,0 +1,19 @@
+{
+    "name": "shop/api",
+    "description": "shop api",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Shop\\Api\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dorofeyev Fedor",
+            "email": "wwwproger@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
