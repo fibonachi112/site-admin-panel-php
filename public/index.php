@@ -29,12 +29,12 @@ try {
     /**
      * Read services
      */
-    include APP_PATH . '/config/services.php';
+    include APP_PATH . '/Config/services.php';
 
     /**
      * Handle routes
      */
-    include APP_PATH . '/config/router.php';
+    include APP_PATH . '/Config/router.php';
 
     /**
      * Get config service for use in inline setup below
@@ -44,7 +44,7 @@ try {
     /**
      * Include Autoloader
      */
-    include APP_PATH . '/config/loader.php';
+    include APP_PATH . '/Config/loader.php';
 
     /**
      * Handle the request
