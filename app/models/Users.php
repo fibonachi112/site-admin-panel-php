@@ -1,6 +1,6 @@
 <?php
 
-namespace AppModels;
+namespace App\Models;
 
 use Phalcon\Filter\Validation;
 use Phalcon\Filter\Validation\Validator\Email as EmailValidator;
@@ -379,5 +379,4 @@ class Users extends \Phalcon\Mvc\Model
     {
         return parent::findFirst($parameters);
     }
-
 }
