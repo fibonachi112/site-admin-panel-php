@@ -14,6 +14,12 @@ $api->addPost('/login', [
     'controller' => 'auth',
     'action'     => 'login',
 ]);
+
+$api->addGet('/pages/index', [
+    'controller' => 'index',
+    'action'     => 'index',
+]);
+
 $router->mount($api);
 
 return $router;
