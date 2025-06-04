@@ -18,7 +18,7 @@ class UsersTask extends Task
         [$email, $password] = $params + [null, null];
 
         $messages = $validator->validate([
-            'email' => $email,
+            'email'    => $email,
             'password' => $password
         ]);
 
@@ -29,12 +29,17 @@ class UsersTask extends Task
             return;
         }
 
-        $user = new Users([
-            'email'=> $params[0],
-            'passwordHash'=> $this->security->hash($params[1]),
-        ]);
+        $user = new Users();
+
+        $user->setEmail($email);
+        $user->setPasswordHash($this->security->hash($password));
+
+        if (!$user->create()) {
+            foreach ($user->getMessages() as $message) {
+                echo $message . PHP_EOL;
+            }
+        }
 
         echo "Создание пользователя...\n";
-        var_dump($params);
     }
 }
