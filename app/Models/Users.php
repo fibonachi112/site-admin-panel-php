@@ -30,13 +30,13 @@ class Users extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    protected $passwordHash;
+    protected $password_hash;
 
     /**
      *
      * @var string
      */
-    protected $fullName;
+    protected $full_name;
 
     /**
      *
@@ -54,25 +54,25 @@ class Users extends \Phalcon\Mvc\Model
      *
      * @var boolean
      */
-    protected $isActive;
+    protected $is_active;
 
     /**
      *
      * @var boolean
      */
-    protected $isAdmin;
+    protected $is_admin;
 
     /**
      *
      * @var string
      */
-    protected $createdAt;
+    protected $created_at;
 
     /**
      *
      * @var string
      */
-    protected $updatedAt;
+    protected $updated_at;
 
     /**
      * Method to set the value of field id
@@ -116,12 +116,12 @@ class Users extends \Phalcon\Mvc\Model
     /**
      * Method to set the value of field password_hash
      *
-     * @param string $passwordHash
+     * @param string $password_hash
      * @return $this
      */
-    public function setPasswordHash($passwordHash)
+    public function setPasswordHash($password_hash)
     {
-        $this->passwordHash = $passwordHash;
+        $this->password_hash = $password_hash;
 
         return $this;
     }
@@ -129,12 +129,12 @@ class Users extends \Phalcon\Mvc\Model
     /**
      * Method to set the value of field full_name
      *
-     * @param string $fullName
+     * @param string $full_name
      * @return $this
      */
-    public function setFullName($fullName)
+    public function setFullName($full_name)
     {
-        $this->fullName = $fullName;
+        $this->full_name = $full_name;
 
         return $this;
     }
@@ -168,12 +168,12 @@ class Users extends \Phalcon\Mvc\Model
     /**
      * Method to set the value of field is_active
      *
-     * @param boolean $isActive
+     * @param boolean $is_active
      * @return $this
      */
-    public function setIsActive($isActive)
+    public function setIsActive($is_active)
     {
-        $this->isActive = $isActive;
+        $this->is_active = $is_active;
 
         return $this;
     }
@@ -181,12 +181,12 @@ class Users extends \Phalcon\Mvc\Model
     /**
      * Method to set the value of field is_admin
      *
-     * @param boolean $isAdmin
+     * @param boolean $is_admin
      * @return $this
      */
-    public function setIsAdmin($isAdmin)
+    public function setIsAdmin($is_admin)
     {
-        $this->isAdmin = $isAdmin;
+        $this->is_admin = $is_admin;
 
         return $this;
     }
@@ -194,12 +194,12 @@ class Users extends \Phalcon\Mvc\Model
     /**
      * Method to set the value of field created_at
      *
-     * @param string $createdAt
+     * @param string $created_at
      * @return $this
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($created_at)
     {
-        $this->createdAt = $createdAt;
+        $this->created_at = $created_at;
 
         return $this;
     }
@@ -207,12 +207,12 @@ class Users extends \Phalcon\Mvc\Model
     /**
      * Method to set the value of field updated_at
      *
-     * @param string $updatedAt
+     * @param string $updated_at
      * @return $this
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt($updated_at)
     {
-        $this->updatedAt = $updatedAt;
+        $this->updated_at = $updated_at;
 
         return $this;
     }
@@ -254,7 +254,7 @@ class Users extends \Phalcon\Mvc\Model
      */
     public function getPasswordHash()
     {
-        return $this->passwordHash;
+        return $this->password_hash;
     }
 
     /**
@@ -264,7 +264,7 @@ class Users extends \Phalcon\Mvc\Model
      */
     public function getFullName()
     {
-        return $this->fullName;
+        return $this->full_name;
     }
 
     /**
@@ -294,7 +294,7 @@ class Users extends \Phalcon\Mvc\Model
      */
     public function getIsActive()
     {
-        return $this->isActive;
+        return $this->is_active;
     }
 
     /**
@@ -304,7 +304,7 @@ class Users extends \Phalcon\Mvc\Model
      */
     public function getIsAdmin()
     {
-        return $this->isAdmin;
+        return $this->is_admin;
     }
 
     /**
@@ -314,7 +314,7 @@ class Users extends \Phalcon\Mvc\Model
      */
     public function getCreatedAt()
     {
-        return $this->createdAt;
+        return $this->created_at;
     }
 
     /**
@@ -324,7 +324,7 @@ class Users extends \Phalcon\Mvc\Model
      */
     public function getUpdatedAt()
     {
-        return $this->updatedAt;
+        return $this->updated_at;
     }
 
     /**
