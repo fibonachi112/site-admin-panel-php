@@ -8,12 +8,17 @@ defined('BASE_PATH') || define('BASE_PATH', getenv('BASE_PATH') ?: realpath(dirn
 defined('APP_PATH') || define('APP_PATH', BASE_PATH . '/app');
 
 return new \Phalcon\Config\Config([
-    'database' => [
-        'adapter'     => 'Postgresql',
-        'host'        => 'db-postgres',
-        'username'    => 'root',
-        'password'    => 'pass',
-        'dbname'      => 'shop',
+    'database'    => [
+        'adapter'  => getenv('DB_ADAPTER') ?? 'Postgresql',
+        'host'     => getenv('DB_HOST') ?? 'db-postgres',
+        'username' => getenv('DB_USERNAME') ??'root',
+        'password' => getenv('DB_PASSWORD') ?? 'pass',
+        'dbname'   => getenv('DB_NAME') ?? 'shop',
+    ],
+    'security'    => [
+        'jwtExpire'    => 3600,
+        'jwtSecret'    => getenv('JWT_SECRET') ?? 'secret',
+        'jwtAlgorithm' => getenv('JWT_ALGORITHM') ?? 'HS256'
     ],
     'application' => [
         'appDir'         => APP_PATH . '/',
