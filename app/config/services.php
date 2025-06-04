@@ -1,16 +1,17 @@
 <?php
 declare(strict_types=1);
 
-use Phalcon\Html\Escaper;
 use Phalcon\Flash\Direct as Flash;
+use Phalcon\Html\Escaper;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
+use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Php as PhpEngine;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Session\Adapter\Stream as SessionAdapter;
 use Phalcon\Session\Manager as SessionManager;
-use Phalcon\Mvc\Url as UrlResolver;
 
+/** @var $di  \Phalcon\Di\FactoryDefault */
 /**
  * Shared configuration service
  */
@@ -30,7 +31,7 @@ $di->setShared('url', function () {
     return $url;
 });
 
-$di->setShared('security', function(){
+$di->setShared('security', function () {
     $security = new \Phalcon\Encryption\Security();
     $security->setWorkFactor(12);
     return $security;
@@ -47,13 +48,13 @@ $di->setShared('view', function () {
     $view->setViewsDir($config->application->viewsDir);
 
     $view->registerEngines([
-        '.volt' => function ($view) {
+        '.volt'  => function ($view) {
             $config = $this->getConfig();
 
             $volt = new VoltEngine($view, $this);
 
             $volt->setOptions([
-                'path' => $config->application->cacheDir,
+                'path'      => $config->application->cacheDir,
                 'separator' => '_'
             ]);
 
@@ -72,7 +73,7 @@ $di->setShared('view', function () {
 $di->setShared('db', function () {
     $config = $this->getConfig();
 
-    $class = 'Phalcon\Db\Adapter\Pdo\\' . $config->database->adapter;
+    $class  = 'Phalcon\Db\Adapter\Pdo\\' . $config->database->adapter;
     $params = [
         'host'     => $config->database->host,
         'username' => $config->database->username,
@@ -101,7 +102,7 @@ $di->setShared('modelsMetadata', function () {
  */
 $di->set('flash', function () {
     $escaper = new Escaper();
-    $flash = new Flash($escaper);
+    $flash   = new Flash($escaper);
     $flash->setImplicitFlush(false);
     $flash->setCssClasses([
         'error'   => 'alert alert-danger',
@@ -118,7 +119,7 @@ $di->set('flash', function () {
  */
 $di->setShared('session', function () {
     $session = new SessionManager();
-    $files = new SessionAdapter([
+    $files   = new SessionAdapter([
         'savePath' => sys_get_temp_dir(),
     ]);
     $session->setAdapter($files);
