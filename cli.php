@@ -32,7 +32,19 @@ $di         = new CliDI();
 $dispatcher = new Dispatcher();
 
 $dispatcher->setDefaultNamespace('App\Tasks');
+
+$di->setShared('config', function () {
+    return include 'app/Config/config.php';
+});
+
 $di->setShared('dispatcher', $dispatcher);
+
+$di->setShared('security', function () {
+    $security = new \Phalcon\Encryption\Security();
+    $security->setWorkFactor(12);
+    return $security;
+});
+
 $di->setShared('db', function () {
     $config = $this->getConfig();
 
@@ -52,9 +64,6 @@ $di->setShared('db', function () {
     return new $class($params);
 });
 
-$di->setShared('config', function () {
-    return include 'app/Config/config.php';
-});
 
 $console = new Console($di);
 
