@@ -4,11 +4,9 @@ use Phalcon\Mvc\Router\Group;
 
 $router = $di->getRouter();
 
-// Define your routes here
-
 $api = new Group([
     'namespace' => 'App\Controllers',
-    'controller'=> 'index',
+    'controller'=> 'Auth',
 ]);
 
 $api->setPrefix("/api");

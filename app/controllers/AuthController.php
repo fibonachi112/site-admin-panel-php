@@ -1,13 +1,15 @@
 <?php
-declare(strict_types=1);
 
-class AuthController extends \Phalcon\Mvc\Controller
+namespace App\Controllers;
+
+use Phalcon\Mvc\Controller;
+
+class AuthController extends Controller
 {
-    public function indexAction()
+    public function loginAction()
     {
         $this->responce->setStatusCode(200,'ok')->setJsonContent([
             'message'=> 'ok'
         ]);
     }
 }
-
