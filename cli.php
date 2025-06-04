@@ -1,50 +1,49 @@
-    <?php
-     use Phalcon\Autoload\Loader;
-    use Phalcon\Cli\Console;
-    use Phalcon\Cli\Dispatcher;
-    use Phalcon\Cli\Console\Exception as PhalconException;
-    use Phalcon\Di\FactoryDefault\Cli as CliDI;
+<?php
 
-    $loader = new Loader();
-    $loader->setNamespaces(
-        [
-            'App' => 'app/',
-        ]
-    );
-    $loader->register();
+use Phalcon\Autoload\Loader;
+use Phalcon\Cli\Console;
+use Phalcon\Cli\Console\Exception as PhalconException;
+use Phalcon\Cli\Dispatcher;
+use Phalcon\Di\FactoryDefault\Cli as CliDI;
 
-    $container  = new CliDI();
-    $dispatcher = new Dispatcher();
+$loader = new Loader();
+$loader->setNamespaces([
+    'App' => 'app/',
+]);
+$loader->register();
 
-    $dispatcher->setDefaultNamespace('App\Tasks');
-    $container->setShared('dispatcher', $dispatcher);
-    $container->setShared('config', function () {
-        return include 'app/config/config.php';
-    });
+$container  = new CliDI();
+$dispatcher = new Dispatcher();
 
-    $console = new Console($container);
+$dispatcher->setDefaultNamespace('App\Tasks');
+$container->setShared('dispatcher', $dispatcher);
+$container->setShared('config', function () {
+    return include 'app/config/config.php';
+});
 
-    $arguments = [];
-    foreach ($argv as $k => $arg) {
-        if ($k === 1) {
-            $arguments['task'] = $arg;
-        } elseif ($k === 2) {
-            $arguments['action'] = $arg;
-        } elseif ($k >= 3) {
-            $arguments['params'][] = array_slice($argv, 3);
-        }
+$console = new Console($container);
+
+$arguments = [];
+foreach ($argv as $k => $arg) {
+    if ($k === 1) {
+        $arguments['task'] = $arg;
+    } elseif ($k === 2) {
+        $arguments['action'] = $arg;
+    } elseif ($k >= 3) {
+        $arguments['params'][] = array_slice($argv, 3);
     }
+}
 
 
-    try {
-        $console->handle($arguments);
-    } catch (PhalconException $e) {
-        fwrite(STDERR, $e->getMessage() . PHP_EOL);
-        exit(1);
-    } catch (\Throwable $throwable) {
-        fwrite(STDERR, $throwable->getMessage() . PHP_EOL);
-        exit(1);
-    } catch (\Exception $exception) {
-        fwrite(STDERR, $exception->getMessage() . PHP_EOL);
-        exit(1);
-    }
+try {
+    $console->handle($arguments);
+} catch (PhalconException $e) {
+    fwrite(STDERR, $e->getMessage() . PHP_EOL);
+    exit(1);
+} catch (\Throwable $throwable) {
+    fwrite(STDERR, $throwable->getMessage() . PHP_EOL);
+    exit(1);
+} catch (\Exception $exception) {
+    fwrite(STDERR, $exception->getMessage() . PHP_EOL);
+    exit(1);
+}

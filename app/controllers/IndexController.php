@@ -7,8 +7,8 @@ class IndexController extends ControllerBase
     public function indexAction()
     {
         return $this->response->setStatusCode(200, 'ok')->setJsonContent([
-            'status' => 'ok',
-            'content'=> "test"
+            'status'  => 'ok',
+            'content' => "test"
         ]);
     }
 }

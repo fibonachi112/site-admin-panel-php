@@ -37,15 +37,15 @@ class AuthController extends Controller
 
         $payload = [
             'email' => $user->getEmail(),
-            'iat'=> time(),
-            'exp' => time() + $config->security->jwtExpire
+            'iat'   => time(),
+            'exp'   => time() + $config->security->jwtExpire
         ];
 
         $jwt = JWT::encode($payload, $config->security->jwtSecret, $config->security->jwtAlgorithm);
 
         return $this->response->setStatusCode(200, 'ok')->setJsonContent([
             'status' => 'ok',
-            'jwt'=> $jwt
+            'jwt'    => $jwt
         ]);
     }
 }

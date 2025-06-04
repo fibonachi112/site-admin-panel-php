@@ -337,9 +337,9 @@ class Users extends \Phalcon\Mvc\Model
         $validator = new Validation();
 
         $validator->add('email', new EmailValidator([
-                    'model'   => $this,
-                    'message' => 'Please enter a correct email address',
-                ]));
+            'model'   => $this,
+            'message' => 'Please enter a correct email address',
+        ]));
 
         return $this->validate($validator);
     }
