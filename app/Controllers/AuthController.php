@@ -36,6 +36,7 @@ class AuthController extends Controller
         }
 
         $payload = [
+            'id'    => $user->getId(),
             'email' => $user->getEmail(),
             'iat'   => time(),
             'exp'   => time() + $config->security->jwtExpire
