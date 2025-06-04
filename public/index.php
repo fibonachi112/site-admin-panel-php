@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Phalcon\Di\FactoryDefault;
+use Dotenv\Dotenv;
 
 error_reporting(E_ALL);
 
@@ -9,6 +10,16 @@ define('BASE_PATH', dirname(__DIR__));
 define('APP_PATH', BASE_PATH . '/app');
 
 try {
+    require dirname(__DIR__) . '/vendor/autoload.php';
+
+    $dotenv = Dotenv::createImmutable(BASE_PATH);
+
+    $dotenv->load();
+
+    foreach ($_ENV as $key => $value) {
+        putenv("$key=$value");
+    }
+
     /**
      * The FactoryDefault Dependency Injector automatically registers
      * the services that provide a full stack framework.
