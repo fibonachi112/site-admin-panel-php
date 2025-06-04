@@ -9,7 +9,7 @@ class AuthController extends Controller
 {
     public function loginAction()
     {
-        $this->responce->setStatusCode(200,'ok')->setJsonContent([
+        return $this->response->setStatusCode(200,'ok')->setJsonContent([
             'message'=> 'ok'
         ]);
     }

@@ -16,4 +16,4 @@ $api->addPost('/login', [
 ]);
 $router->mount($api);
 
-$router->handle($_SERVER['REQUEST_URI']);
+return $router;
