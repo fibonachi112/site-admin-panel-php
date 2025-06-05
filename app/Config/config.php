@@ -25,6 +25,7 @@ return new \Phalcon\Config\Config([
         'controllersDir' => APP_PATH . '/Controllers/',
         'modelsDir'      => APP_PATH . '/Models/',
         'migrationsDir'  => APP_PATH . '/Migrations/',
+        'middlewareDir'  => APP_PATH . '/Middleware/',
         'viewsDir'       => APP_PATH . '/Views/',
         'pluginsDir'     => APP_PATH . '/Plugins/',
         'libraryDir'     => APP_PATH . '/Library/',
