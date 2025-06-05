@@ -9,6 +9,12 @@ class JwtAuthMiddleware extends \Phalcon\Di\Injectable
 {
     public function beforeExecuteRoute(\Phalcon\Events\Event $event, \Phalcon\Mvc\Dispatcher $dispatcher): bool
     {
+        $route = $dispatcher->getControllerName();
+
+        if (in_array($route, ['auth'])) {
+            return true; // эти контроллеры не требуют авторизации
+        }
+
         $authHeader = $this->request->getHeader('Authorization');
 
         if (!$authHeader || !str_starts_with($authHeader, "Bearer")) {

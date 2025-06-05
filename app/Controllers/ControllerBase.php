@@ -7,5 +7,8 @@ use Phalcon\Mvc\Controller;
 
 class ControllerBase extends Controller
 {
-    // Implement common logic
+    protected function getAuthUser()
+    {
+        return $this->di->getShared('auth_user');
+    }
 }
