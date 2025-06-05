@@ -1,42 +1,50 @@
 <?php
 
+namespace App\Middleware;
+
+use Firebase\JWT\Key;
+use Phalcon\Config\Config;
+
 class JwtAuthMiddleware extends \Phalcon\Di\Injectable
 {
     public function beforeExecuteRoute(\Phalcon\Events\Event $event, \Phalcon\Mvc\Dispatcher $dispatcher): bool
     {
-        $authHeader = $this->request->getHeader('Authorisation');
+        $authHeader = $this->request->getHeader('Authorization');
 
-        if (!$authHeader || !str_starts_with("Bearer: ", $authHeader)) {
-            return $this->unauthorized('Missing bearer token');
+        if (!$authHeader || !str_starts_with($authHeader, "Bearer")) {
+            $this->unauthorized('Missing bearer token');
         }
 
-        $token = trim(str_replace("Bearer: ", "", $authHeader));
+        /** @var Config $config */
+        $config = $this->config;
+
+        $token   = trim(str_replace("Bearer", "", $authHeader));
+        $jwtKey  = new Key($config->security->jwtSecret, $config->security->jwtAlgorithm);
+        $decoded = \Firebase\JWT\JWT::decode($token, $jwtKey);
 
         try {
-            $decoded = \Firebase\JWT\JWT::decode($token);
-            $user    = \App\Models\Users::findFirst(['id' => $decoded->id]);
+            $user = \App\Models\Users::findFirst(['id' => $decoded->id]);
 
             if (!$user) {
-                return $this->unauthorized("userNotFound");
+                $this->unauthorized("userNotFound");
             }
 
             $this->di->setShared('auth_user', $user);
 
         } catch (\Throwable $e) {
-            return $this->unauthorized('invalid token');
+            $this->unauthorized('invalid token');
         }
 
         return true;
     }
 
-    protected function unauthorized(string $message): bool
+    protected function unauthorized(string $message)
     {
-        $this->response->setStatusCode(401, 'Unauthorized')->setJsonContent([
+        $this->response->setContentType('application/json', 'utf-8')->setStatusCode(401, 'Unauthorized')->setJsonContent([
             'status'  => 'error',
             'message' => $message
         ])->send();
 
-        return false;
+        exit;
     }
-
 }
