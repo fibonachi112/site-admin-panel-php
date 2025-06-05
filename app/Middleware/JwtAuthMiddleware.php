@@ -24,9 +24,14 @@ class JwtAuthMiddleware extends \Phalcon\Di\Injectable
         /** @var Config $config */
         $config = $this->config;
 
-        $token   = trim(str_replace("Bearer", "", $authHeader));
-        $jwtKey  = new Key($config->security->jwtSecret, $config->security->jwtAlgorithm);
-        $decoded = \Firebase\JWT\JWT::decode($token, $jwtKey);
+
+        try {
+            $token   = trim(str_replace("Bearer", "", $authHeader));
+            $jwtKey  = new Key($config->security->jwtSecret, $config->security->jwtAlgorithm);
+            $decoded = \Firebase\JWT\JWT::decode($token, $jwtKey);
+        } catch (\Throwable $e) {
+            $this->unauthorized("token expired");
+        }
 
         try {
             $user = \App\Models\Users::findFirst(['id' => $decoded->id]);
