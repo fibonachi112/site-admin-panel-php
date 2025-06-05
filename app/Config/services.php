@@ -96,3 +96,15 @@ $di->setShared('db', function () {
 $di->setShared('modelsMetadata', function () {
     return new MetaDataAdapter();
 });
+
+/**
+ * adding event manager and dispatcher
+ */
+$eventManager = new \Phalcon\Events\Manager();
+$eventManager->attach('dispatch:beforeExecuteRoute', new JwtAuthMiddleware());
+
+$di->setShared("dispatcher", function() use ($eventManager){
+    $dispatcher = new \Phalcon\Mvc\Dispatcher();
+    $dispatcher->setEventsManager($eventManager);
+    return $dispatcher;
+});
