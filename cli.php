@@ -81,13 +81,8 @@ foreach ($argv as $k => $arg) {
 
 try {
     $console->handle($arguments);
-} catch (PhalconException $e) {
-    fwrite(STDERR, $e->getMessage() . PHP_EOL);
-    exit(1);
 } catch (\Throwable $throwable) {
     fwrite(STDERR, $throwable->getMessage() . PHP_EOL);
     exit(1);
-} catch (\Exception $exception) {
-    fwrite(STDERR, $exception->getMessage() . PHP_EOL);
-    exit(1);
 }
+
