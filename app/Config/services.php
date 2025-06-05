@@ -1,15 +1,12 @@
 <?php
 declare(strict_types=1);
 
-use Phalcon\Flash\Direct as Flash;
-use Phalcon\Html\Escaper;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Php as PhpEngine;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
-use Phalcon\Session\Adapter\Stream as SessionAdapter;
-use Phalcon\Session\Manager as SessionManager;
+use App\Middleware\JwtAuthMiddleware;
 
 /** @var $di  \Phalcon\Di\FactoryDefault */
 /**
@@ -18,6 +15,19 @@ use Phalcon\Session\Manager as SessionManager;
 $di->setShared('config', function () {
     return include APP_PATH . "/Config/config.php";
 });
+
+$loader = new \Phalcon\Autoload\Loader();
+$config = $di->getConfig();
+
+/**
+ * We're a registering a set of directories taken from the configuration file
+ */
+
+$loader->setNamespaces([
+    'App\\Controllers' => $config->application->controllersDir,
+    'App\\Models'      => $config->application->modelsDir,
+    'App\\Middleware'  => $config->application->middlewareDir,
+])->register();;
 
 /**
  * The URL component is used to generate all kind of urls in the application
@@ -108,3 +118,5 @@ $di->setShared("dispatcher", function() use ($eventManager){
     $dispatcher->setEventsManager($eventManager);
     return $dispatcher;
 });
+
+
