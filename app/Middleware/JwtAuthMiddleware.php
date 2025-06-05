@@ -24,7 +24,6 @@ class JwtAuthMiddleware extends \Phalcon\Di\Injectable
         /** @var Config $config */
         $config = $this->config;
 
-
         try {
             $token   = trim(str_replace("Bearer", "", $authHeader));
             $jwtKey  = new Key($config->security->jwtSecret, $config->security->jwtAlgorithm);
